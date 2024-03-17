@@ -1,0 +1,57 @@
+GET https://localhost:7088/todoitems
+###
+
+GET https://localhost:7088/todoitems/2
+###
+
+POST https://localhost:7088/todoitems
+Content-Type: application/json
+
+{
+    "name": "learn danish 2",
+    "isCompleted": false
+}
+###
+
+PUT https://localhost:7088/todoitems/2
+Content-Type: application/json
+
+{
+    "name": "learn Danish 2",
+    "isCompleted": true
+}
+###
+
+DELETE https://localhost:7088/todoitems/2
+###
+
+## ======================================================================================
+## Docker
+## ======================================================================================
+
+GET https://localhost:32768/todoitems
+###
+
+GET https://localhost:32768/todoitems/1
+###
+
+POST https://localhost:32768/todoitems
+Content-Type: application/json
+
+{
+    "name": "learn danish 2",
+    "isCompleted": false
+}
+###
+
+PUT https://localhost:32768/todoitems/2
+Content-Type: application/json
+
+{
+    "name": "learn Danish 2",
+    "isCompleted": true
+}
+###
+
+DELETE https://localhost:32768/todoitems/2
+###
