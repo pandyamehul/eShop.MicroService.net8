@@ -20,7 +20,7 @@ C# code repository - learning developing complex micro service.
     OR
 
     ![Clone Catalog API](/img/20240420.1710.Clone.Catalog.API.png)
-    ![Clone Catalog API](20240420.1710.Clone.Catalog.API.2.png)
+    ![Clone Catalog API](/img/20240420.1710.Clone.Catalog.API.2.png)
 
     Clone repo to local folder on computer.
 
