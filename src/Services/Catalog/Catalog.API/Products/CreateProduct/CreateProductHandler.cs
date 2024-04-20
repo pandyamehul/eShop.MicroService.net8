@@ -1,24 +1,35 @@
 ﻿using BuildingBlocks.CQRS;
+using Catalog.API.Models;
 
-namespace Catalog.API.Products.CreateProduct
+namespace Catalog.API.Products.CreateProduct;
+
+public record CreateProductCommand(
+        string Name,
+        string Description,
+        string ImageFile,
+        decimal Price,
+        List<String> Category
+    ) : ICommand<CreateProductResult>;
+
+public record CreateProductResult(Guid Id);
+internal class CreateProductHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
-    public record CreateProductCommand(
-            string Name,
-            string Description,
-            string ImageFile,
-            decimal Price,
-            List<String> Categpry
-        ) : ICommand<CreateProductResult>;
-
-    public record CreateProductResult(Guid Id);
-    internal class CreateProductHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
+    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        public Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
-        {
-            //Business logic to be implemented below to create product
-            // Create product entity from command object
+        //Business logic to be implemented below to create product
+        // Create product entity from command object
+        // Save to Db
+        // Return create product result
 
-            throw new NotImplementedException();
-        }
+        var product = new Product {
+            Name = command.Name,
+            Category = command.Category,
+            Description = command.Description,
+            ImageFile = command.ImageFile,
+            Price = command.Price
+        };
+
+        //throw new NotImplementedException();
+        return new CreateProductResult(Guid.NewGuid());
     }
-}
+};

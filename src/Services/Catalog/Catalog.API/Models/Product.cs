@@ -6,7 +6,7 @@
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public string ImageFile { get; set; } = default!;
-        public double Price { get; set; }
-        public List<string> Categpry { get; set; } = new();
+        public decimal Price { get; set; }
+        public List<string> Category { get; set; } = new();
     }
 }
