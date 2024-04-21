@@ -87,6 +87,18 @@ C# code repository - learning developing complex micro service.
 ### 53: Register MediatR, Carter and Mapster libraries to ASP.net dependency injection services
 
 - Open program.cs file and add dependency injection services and configre the http request piepline.
-- 
+- To register these libraries following code block added to Program.cs under the request pipeline.
+
+    ```c#
+    //Add Services to container
+    builder.Services.AddCarter();
+    builder.Services.AddMediatR(config =>
+    {
+        config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+    });
+    var app = builder.Build();
+    //Configure HTTP request pipeline
+    app.MapCarter();
+    ```
 
 ## 99: Troubleshooting
