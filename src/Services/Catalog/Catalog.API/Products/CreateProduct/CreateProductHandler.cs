@@ -18,9 +18,6 @@ internal class CreateProductHandler : ICommandHandler<CreateProductCommand, Crea
     {
         //Business logic to be implemented below to create product
         // Create product entity from command object
-        // Save to Db
-        // Return create product result
-
         var product = new Product {
             Name = command.Name,
             Category = command.Category,
@@ -28,8 +25,12 @@ internal class CreateProductHandler : ICommandHandler<CreateProductCommand, Crea
             ImageFile = command.ImageFile,
             Price = command.Price
         };
+        // Save to Db
+
+
+        // Return create product result
+        return new CreateProductResult(Guid.NewGuid());
 
         //throw new NotImplementedException();
-        return new CreateProductResult(Guid.NewGuid());
     }
 };
