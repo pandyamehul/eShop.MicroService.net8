@@ -6,6 +6,7 @@
     - [50: Develop Create Product endpoint with minimal API and Cater](#50-develop-create-product-endpoint-with-minimal-api-and-cater)
     - [51,52: Develop POST endpoint with Carter implements ICarterModule with minimal API](#5152-develop-post-endpoint-with-carter-implements-icartermodule-with-minimal-api)
     - [53: Register MediatR, Carter and Mapster libraries to ASP.net dependency injection services](#53-register-mediatr-carter-and-mapster-libraries-to-aspnet-dependency-injection-services)
+    - [54: Test catalog API - CreateProduct POST request - Debug Carter and MediatR libraries](#54-test-catalog-api---createproduct-post-request---debug-carter-and-mediatr-libraries)
   - [99: Troubleshooting](#99-troubleshooting)
 
 C# code repository - learning developing complex micro service.
@@ -58,7 +59,7 @@ C# code repository - learning developing complex micro service.
 - Implement "AddRoute" method in CreateProductEndpoint.
 - Map request to create product command to pass to command handler. Use MediatR library and trigger MideateR command handler.
 - In order to pass values from request to command object need mapping object and this is done using mapping library "Mapster".
-- Mapster - is high performance and flexible mapping library that map objects. 
+- Mapster - is high performance and flexible mapping library that map objects.
 - Mapster is used to map request object to command object and response to result object.
 - All common libraries and generic implementations are added to the building Block class library.
 - Add "Mapster" library into Building block project under common class libraries.
@@ -100,5 +101,12 @@ C# code repository - learning developing complex micro service.
     //Configure HTTP request pipeline
     app.MapCarter();
     ```
+
+### 54: Test catalog API - CreateProduct POST request - Debug Carter and MediatR libraries
+
+- Build and run micro service using https option and end point.
+- Initially when project started it run but when sent POST request it didn't run because Carter library was referenced into the "BuildingBlock" project and we registered program assembly. Thus we got 404 error.
+- To resolve this issue, carter library referenced into the Catalog API instead of building block.
+- After moving reference to catalog API POSt request seems worked.
 
 ## 99: Troubleshooting
