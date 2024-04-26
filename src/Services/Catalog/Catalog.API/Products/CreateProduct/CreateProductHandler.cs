@@ -12,11 +12,13 @@ public record CreateProductCommand(
     ) : ICommand<CreateProductResult>;
 
 public record CreateProductResult(Guid Id);
-internal class CreateProductHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
+internal class CreateProductHandler(IDocumentSession session) 
+    : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         //Business logic to be implemented below to create product
+
         // Create product entity from command object
         var product = new Product {
             Name = command.Name,
@@ -26,10 +28,11 @@ internal class CreateProductHandler : ICommandHandler<CreateProductCommand, Crea
             Price = command.Price
         };
         // Save to Db
-
+        session.Store( product );
+        await session.SaveChangesAsync(cancellationToken);
 
         // Return create product result
-        return new CreateProductResult(Guid.NewGuid());
+        return new CreateProductResult(product.Id);
 
         //throw new NotImplementedException();
     }

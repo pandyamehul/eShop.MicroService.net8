@@ -7,7 +7,15 @@
     - [51,52: Develop POST endpoint with Carter implements ICarterModule with minimal API](#5152-develop-post-endpoint-with-carter-implements-icartermodule-with-minimal-api)
     - [53: Register MediatR, Carter and Mapster libraries to ASP.net dependency injection services](#53-register-mediatr-carter-and-mapster-libraries-to-aspnet-dependency-injection-services)
     - [54: Test catalog API - CreateProduct POST request - Debug Carter and MediatR libraries](#54-test-catalog-api---createproduct-post-request---debug-carter-and-mediatr-libraries)
-  - [99: Troubleshooting](#99-troubleshooting)
+  - [Section 6: Develop Catalog.API Infrastructure, Handler and Endpoint Classes for CRUD](#section-6-develop-catalogapi-infrastructure-handler-and-endpoint-classes-for-crud)
+    - [55: Introduction - Develop Catalog.API Infrastructure, Handler and Endpoint Classes](#55-introduction---develop-catalogapi-infrastructure-handler-and-endpoint-classes)
+    - [56: Infrastructure - Data concerms for Catalog API - Marten .NET Transactional Db](#56-infrastructure---data-concerms-for-catalog-api---marten-net-transactional-db)
+    - [57: Opening sessions in Marten as Document Db](#57-opening-sessions-in-marten-as-document-db)
+    - [58: Develop Command Handler to save product to Document Db using Marten library](#58-develop-command-handler-to-save-product-to-document-db-using-marten-library)
+    - [59: Register and configure Marten Document Db library into program.cs asp.net DI](#59-register-and-configure-marten-document-db-library-into-programcs-aspnet-di)
+    - [60: EShops microservice - Deployment Strategy](#60-eshops-microservice---deployment-strategy)
+    - [61: Setup PostgresSQL Db using Docker-compose file for Multi-container Docker Env](#61-setup-postgressql-db-using-docker-compose-file-for-multi-container-docker-env)
+  - [999: Troubleshooting](#999-troubleshooting)
 
 C# code repository - learning developing complex micro service.
 
@@ -109,4 +117,69 @@ C# code repository - learning developing complex micro service.
 - To resolve this issue, carter library referenced into the Catalog API instead of building block.
 - After moving reference to catalog API POSt request seems worked.
 
-## 99: Troubleshooting
+## Section 6: Develop Catalog.API Infrastructure, Handler and Endpoint Classes for CRUD
+
+Infrastructure -Data Concerns for Catalog API -Marten .NET Transactional Document DB for PostgreSQL Database
+
+### 55: Introduction - Develop Catalog.API Infrastructure, Handler and Endpoint Classes
+
+Ref. slide# 157 - 159
+
+### 56: Infrastructure - Data concerms for Catalog API - Marten .NET Transactional Db
+
+Ref. slide# 160 - 164
+
+### 57: Opening sessions in Marten as Document Db
+
+Ref. slide# 165
+
+### 58: Develop Command Handler to save product to Document Db using Marten library
+
+- To deal with database added reference of Marten nuget package reference.
+- Added following lines of code to "CreateProductHandler" under handle method.
+
+    ```c#
+    //Injected IDocumentSession object
+    internal class CreateProductHandler(IDocumentSession session)
+
+    // Save to Db
+    session.Store( product );
+    await session.SaveChangesAsync(cancellationToken);
+
+    // Return newly created Db id
+    return new CreateProductResult(product.Id);
+    ```
+
+### 59: Register and configure Marten Document Db library into program.cs asp.net DI
+
+- To register library and to configure db added following code and configurations
+
+    ```c#
+    //Program.cs
+    builder.Services.AddMarten( options =>
+    {
+        options.Connection(builder.Configuration.GetConnectionString("Database")!);
+    }).UseLightweightSessions();
+    ```
+
+    ```json
+    //appsettings.json
+    "ConnectionString": {
+        "Database": "server=localhost; port=5432; Databse: CatalogDb; User Id=postgres; Password=postgres; Include Error Detail=true;"
+    },
+    ```
+
+### 60: EShops microservice - Deployment Strategy
+
+- Ref. slide 167-
+
+### 61: Setup PostgresSQL Db using Docker-compose file for Multi-container Docker Env
+
+Following steps were added to enable docker environment for development.
+
+- Right click on Catalog API solution. Select Add --> Container Orchestrator support.
+- Select "Docker Compose"
+- Select "Linux" environment
+- New additional files will be added to the solution
+
+## 999: Troubleshooting
