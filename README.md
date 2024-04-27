@@ -15,6 +15,7 @@
     - [59: Register and configure Marten Document Db library into program.cs asp.net DI](#59-register-and-configure-marten-document-db-library-into-programcs-aspnet-di)
     - [60: EShops microservice - Deployment Strategy](#60-eshops-microservice---deployment-strategy)
     - [61: Setup PostgresSQL Db using Docker-compose file for Multi-container Docker Env](#61-setup-postgressql-db-using-docker-compose-file-for-multi-container-docker-env)
+    - [62: Add PostgresSQL into Docker compose file for multi container docker environment](#62-add-postgressql-into-docker-compose-file-for-multi-container-docker-environment)
   - [999: Troubleshooting](#999-troubleshooting)
 
 C# code repository - learning developing complex micro service.
@@ -181,5 +182,33 @@ Following steps were added to enable docker environment for development.
 - Select "Docker Compose"
 - Select "Linux" environment
 - New additional files will be added to the solution
+
+### 62: Add PostgresSQL into Docker compose file for multi container docker environment
+
+- Added below configurations in docker-compose yaml files
+
+```yaml
+#docker-compose.yml
+services:
+  catalogdb:
+    image: postgres
+
+volumes:
+  postgres_catalog:
+
+#docker-compose.override.yml
+services:
+ catalogdb:
+   container_name: eshop.catalogdb
+   environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=CatalogDb
+   restart: always
+   ports:
+    - "5432:5432"
+   volumes:
+    - eshop_postgres_catalog:/var/lib/postgresql/data/ 
+```
 
 ## 999: Troubleshooting
