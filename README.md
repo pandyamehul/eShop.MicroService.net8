@@ -16,6 +16,7 @@
     - [60: EShops microservice - Deployment Strategy](#60-eshops-microservice---deployment-strategy)
     - [61: Setup PostgresSQL Db using Docker-compose file for Multi-container Docker Env](#61-setup-postgressql-db-using-docker-compose-file-for-multi-container-docker-env)
     - [62: Add PostgresSQL into Docker compose file for multi container docker environment](#62-add-postgressql-into-docker-compose-file-for-multi-container-docker-environment)
+    - [63: Run docker compose on visual studio to setup PostgreSQL DB on docker](#63-run-docker-compose-on-visual-studio-to-setup-postgresql-db-on-docker)
   - [999: Troubleshooting](#999-troubleshooting)
 
 C# code repository - learning developing complex micro service.
@@ -211,4 +212,41 @@ services:
     - eshop_postgres_catalog:/var/lib/postgresql/data/ 
 ```
 
+### 63: Run docker compose on visual studio to setup PostgreSQL DB on docker
+
+- After fixing issue with docker file, executed docker compose from visual studio.
+- It downloaded necessary images and spin container to run database.
+- To connect to db following steps were performed
+
+    ```pwsh
+    docker ps
+    docker exec -it <container_id> bash
+    #this will lands to the postgres console
+    \l #to list available dbs
+    \c CatalogDb # to connect to Db
+    \d #to list tables
+    ```
+
 ## 999: Troubleshooting
+
+- Command to see git logs in nice one line manner
+
+    ```cmd
+    git log --graph --format='%C(yellow)%h%Creset  %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    ```
+
+- was facing issue for running docker compose in VS 2022, unable to run docker compose.
+
+  - At chapter #63, when running docker compose from visual studio 2022 and installed with Rancher, ref. [Git Hub: VS code - Rancher desktop](https://github.com/rancher-sandbox/rancher-desktop/issues/3474). Copied settings.json file at location "*C:\Users\CONMVU\AppData\Roaming\Docker*".
+
+  - After that added following block to docker-compose.yml file.
+
+      ```yaml
+      catalog.api:
+          image: ${DOCKER_REGISTRY-}catalogapi
+          build:
+          context: .
+          dockerfile: Services/Catalog/Catalog.API/
+      ```
+
+  - After performing these twicks, able to run docker componse and able to spin the containers from visual studio 2022.
