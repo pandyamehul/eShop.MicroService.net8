@@ -250,3 +250,27 @@ services:
       ```
 
   - After performing these twicks, able to run docker componse and able to spin the containers from visual studio 2022.
+
+- Following command used to resolve Git remote push issue:
+
+    ```pwsh
+    git config --local user.name "<git user name>"
+    git config --local user.email "<git associated email>"
+    git branch -M main
+    git remote add origin https://github.com/pandyamehul/eShop.MicroService.net8.git
+    git push -u origin main
+
+    git remote -v
+    # origin  git@github.com:pandyamehul/eShop.MicroService.net8.git (fetch)
+    # origin  git@github.com:pandyamehul/eShop.MicroService.net8.git (push)
+
+
+    git config --get remote.origin.url
+    # git@github.com:pandyamehul/eShop.MicroService.net8.git
+
+    # Finally following steps worked to sync repo to remote from locally.
+    git remote rm origin
+    git remote -v
+    git remote add origin https://github.com/pandyamehul/eShop.MicroService.net8.git
+    git push -u origin main
+    ```
