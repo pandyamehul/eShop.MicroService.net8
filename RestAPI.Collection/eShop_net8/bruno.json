@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "eShop_net8",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
