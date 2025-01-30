@@ -25,7 +25,30 @@ Content-Type: application/json
 ###
 
 ## GET Product by Category
-GET https://localhost:6050/products/category/p2
+GET https://localhost:6050/products/category/Prd1
+Content-Type: application/json
+
+###
+
+## PUT Product by Id
+PUT https://localhost:6050/products
+Content-Type: application/json
+
+{
+    "id": "01948619-4e97-4f4f-af4e-249663337222",
+    "name": "Product #1",
+    "description": "Product #1 description",
+    "imageFile": "image not available",
+    "price": 2.5,
+    "category": [
+    "Prd1",
+    "Prd2"
+    ]
+}
+###
+
+## DELETE Product by Id
+DELETE https://localhost:6050/products/01948fa8-61e4-4c1c-807e-560b491fbb1c
 Content-Type: application/json
 
 ###
