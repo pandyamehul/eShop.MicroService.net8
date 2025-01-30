@@ -1,3 +1,5 @@
+###
+## Create Product
 POST https://localhost:6050/products
 Content-Type: application/json
 
@@ -8,3 +10,22 @@ Content-Type: application/json
     "Price" : 2,
     "Category": ["p1", "p2"]
 }
+###
+
+## GET Products List
+GET https://localhost:6050/products
+Content-Type: application/json
+
+###
+
+## GET Product by Id
+GET https://localhost:6050/products/01948fa7-bdc8-4968-b039-7c5ac79aafb2
+Content-Type: application/json
+
+###
+
+## GET Product by Category
+GET https://localhost:6050/products/category/p2
+Content-Type: application/json
+
+###

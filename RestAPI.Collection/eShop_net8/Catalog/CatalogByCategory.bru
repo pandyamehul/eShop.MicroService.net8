@@ -1,0 +1,15 @@
+meta {
+  name: CatalogByCategory
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{catalog_api}}/category/p2
+  body: none
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
