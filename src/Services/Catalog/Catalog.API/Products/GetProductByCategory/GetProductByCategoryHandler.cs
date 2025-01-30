@@ -2,14 +2,14 @@
 
 namespace Catalog.API.Products.GetProductByCategory;
 
-public record GetProductsByCategoryQuery(string Category) : IQuery<GetProductByCategoryResult>;
+public record GetProductByCategoryQuery(string Category) : IQuery<GetProductByCategoryResult>;
 public record GetProductByCategoryResult(IEnumerable<Product> Products);
 internal class GetProductByCategoryQueryHandler
     (IDocumentSession session, ILogger<GetProductsQueryHandler> logger)
-    : IQueryHandler<GetProductsByCategoryQuery, GetProductByCategoryResult>
+    : IQueryHandler<GetProductByCategoryQuery, GetProductByCategoryResult>
 {
     public async Task<GetProductByCategoryResult>
-        Handle(GetProductsByCategoryQuery query, CancellationToken cancellationToken)
+        Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("GetProductByCategoryQueryHandler.Handle : called with {@Query}", query);
         var products = await session.Query<Product>()
