@@ -3,7 +3,7 @@
 public record CreateProductRequest(
         string Name,
         string Description,
-        string InageFile,
+        string ImageFile,
         decimal Price,
         List<string> Category
     );

@@ -4,10 +4,10 @@ POST https://localhost:6050/products
 Content-Type: application/json
 
 {
-    "Name" : "Product 1",
+    "Name" : "Product 12",
     "Description" : "First product description", 
     "ImageFile" : "First product image file path",
-    "Price" : 2,
+    "Price" : -2,
     "Category": ["p1", "p2"]
 }
 ###
