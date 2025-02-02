@@ -24,19 +24,24 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 }
 
 internal class CreateProductHandler
-    (IDocumentSession session, IValidator<CreateProductCommand> validator)
+    // commented below code as it will be handled via validation behavioud
+    //(IDocumentSession session, IValidator<CreateProductCommand> validator)
+    (IDocumentSession session, ILogger<CreateProductHandler> logger)
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         //Business logic to be implemented below to create product
 
+        // commented below code as it will be handled via validation behavioud    
         // Business validation
-        var result = await validator.ValidateAsync(command, cancellationToken);
-        var error = result.Errors.Select(x => x.ErrorMessage).ToList();
-        if (error.Any()) {
-            throw new ValidationException(error.FirstOrDefault());
-        }
+        //var result = await validator.ValidateAsync(command, cancellationToken);
+        //var error = result.Errors.Select(x => x.ErrorMessage).ToList();
+        //if (error.Any()) {
+        //    throw new ValidationException(error.FirstOrDefault());
+        //}
+
+        logger.LogInformation("CreateProductHandler.Handle : called with {@Query}", command);
 
         // Create product entity from command object
         var product = new Product {
