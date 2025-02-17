@@ -6,6 +6,9 @@ builder.Services.AddMediatR(config =>
     config.RegisterServicesFromAssemblies(assembly);
     //adding validator behavior in pipeline
     config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+    //add logging behaviour for general logging in pipeline for every mediatr request
+    //centralize logging
+    config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
 });
 builder.Services.AddValidatorsFromAssembly(assembly);
 

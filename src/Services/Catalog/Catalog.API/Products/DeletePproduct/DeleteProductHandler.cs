@@ -14,12 +14,15 @@ public class DeleteProductCommandValidator : AbstractValidator<DeleteProductComm
     }
 }
 internal class DeleteProductCommandHandler
-    (IDocumentSession session, ILogger<GetProductsQueryHandler> logger)
+    (
+        IDocumentSession session
+        //, ILogger<GetProductsQueryHandler> logger
+    )
     : ICommandHandler<DeleteProductCommand, DeleteProductResult>
 {
     public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
     {
-        logger.LogInformation("DeleteProductCommandHandler.Handle : called with {@Query}", command);
+        //logger.LogInformation("DeleteProductCommandHandler.Handle : called with {@Query}", command);
         session.Delete<Product>(command.Id);
         await session.SaveChangesAsync(cancellationToken);
         return new DeleteProductResult(true);

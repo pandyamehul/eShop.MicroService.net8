@@ -4,10 +4,10 @@ POST https://localhost:6050/products
 Content-Type: application/json
 
 {
-    "Name" : "",
+    "Name" : "Product 1",
     "Description" : "First product description", 
     "ImageFile" : "First product image file path",
-    "Price" : -2,
+    "Price" : 2.0,
     "Category": ["p1", "p2"]
 }
 ###
@@ -19,13 +19,13 @@ Content-Type: application/json
 ###
 
 ## GET Product by Id
-GET https://localhost:6050/products/01948fa7-bdc8-4968-b039-7c5ac79aafb2
+GET https://localhost:6050/products/019515b8-7216-4ed4-b82c-e15b9c6b8d00
 Content-Type: application/json
 
 ###
 
 ## GET Product by Category
-GET https://localhost:6050/products/category/Prd1
+GET https://localhost:6050/products/category/P1
 Content-Type: application/json
 
 ###

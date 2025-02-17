@@ -26,7 +26,10 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 internal class CreateProductHandler
     // commented below code as it will be handled via validation behavioud
     //(IDocumentSession session, IValidator<CreateProductCommand> validator)
-    (IDocumentSession session, ILogger<CreateProductHandler> logger)
+    (
+        IDocumentSession session
+        //, ILogger<CreateProductHandler> logger
+    )
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -41,7 +44,7 @@ internal class CreateProductHandler
         //    throw new ValidationException(error.FirstOrDefault());
         //}
 
-        logger.LogInformation("CreateProductHandler.Handle : called with {@Query}", command);
+        //logger.LogInformation("CreateProductHandler.Handle : called with {@Query}", command);
 
         // Create product entity from command object
         var product = new Product {
