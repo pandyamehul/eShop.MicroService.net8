@@ -1,3 +1,4 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -20,6 +21,10 @@ builder.Services.AddMarten( options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
+
+//Pupulate default products if env. is dev
+if(builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 //Add Custom and Generic Exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
