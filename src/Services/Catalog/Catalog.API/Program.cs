@@ -1,4 +1,7 @@
 
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -29,6 +32,14 @@ if(builder.Environment.IsDevelopment())
 //Add Custom and Generic Exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+//Add support for health checks
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
+
+
+
+
+// ------------------------ Configure ASP.Net request pipeline --------------------------------//
 // Initiate and Run application pipeline
 var app = builder.Build();
 
@@ -68,4 +79,13 @@ app.MapCarter();
 //Configure app to use custom exception handling, empty { } indicates pipeline is 
 app.UseExceptionHandler(optios => { });
 
+//Configure health checks
+app.UseHealthChecks(
+    "/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+
+//run application
 app.Run();

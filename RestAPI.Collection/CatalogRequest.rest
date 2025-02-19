@@ -56,3 +56,10 @@ DELETE https://localhost:6050/products/01948fa8-61e4-4c1c-807e-560b491fbb1c
 Content-Type: application/json
 
 ###
+
+## GET Health of the microservice
+GET https://localhost:6050/health
+# ?pageNumber=4
+# &pageSize=2
+Content-Type: application/json
+###
