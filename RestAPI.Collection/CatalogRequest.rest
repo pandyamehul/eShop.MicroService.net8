@@ -14,8 +14,9 @@ Content-Type: application/json
 
 ## GET Products List
 GET https://localhost:6050/products
+# ?pageNumber=4
+# &pageSize=2
 Content-Type: application/json
-
 ###
 
 ## GET Product by Id
@@ -25,7 +26,10 @@ Content-Type: application/json
 ###
 
 ## GET Product by Category
-GET https://localhost:6050/products/category/P1
+GET https://localhost:6050/products/category/Camera
+# ?pageNumber=1
+# &pageSize=2
+# &category=Camera
 Content-Type: application/json
 
 ###

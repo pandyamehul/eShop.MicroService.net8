@@ -18,6 +18,11 @@ internal class GetProductByCategoryQueryHandler
         var products = await session.Query<Product>()
             .Where( p => p.Category.Contains(query.Category))
             .ToListAsync();
+            //.ToPagedListAsync(
+            //    query.PageNumber ?? 1,
+            //    query.PageSize ?? 10,
+            //    cancellationToken
+            //);
 
         return new GetProductByCategoryResult(products);
     }
