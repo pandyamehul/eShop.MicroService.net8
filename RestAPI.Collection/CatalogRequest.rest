@@ -1,6 +1,6 @@
 ###
 ## Create Product
-POST {{baseUrl}}/products
+POST {{CatalogAPI_baseUrl}}/products
 Content-Type: application/json
 
 {
@@ -13,20 +13,20 @@ Content-Type: application/json
 ###
 
 ## GET Products List
-GET {{baseUrl}}/products
+GET {{CatalogAPI_baseUrl}}/products
 ?pageNumber=4
 &pageSize=2
 Content-Type: application/json
 ###
 
 ## GET Product by Id
-GET {{baseUrl}}/products/019515b8-7216-4ed4-b82c-e15b9c6b8d00
+GET {{CatalogAPI_baseUrl}}/products/019515b8-7216-4ed4-b82c-e15b9c6b8d00
 Content-Type: application/json
 
 ###
 
 ## GET Product by Category
-GET {{baseUrl}}/products/category/Camera
+GET {{CatalogAPI_baseUrl}}/products/category/Camera
 # ?pageNumber=1
 # &pageSize=2
 # &category=Camera
@@ -35,7 +35,7 @@ Content-Type: application/json
 ###
 
 ## PUT Product by Id
-PUT {{baseUrl}}/products
+PUT {{CatalogAPI_baseUrl}}/products
 Content-Type: application/json
 
 {
@@ -52,13 +52,13 @@ Content-Type: application/json
 ###
 
 ## DELETE Product by Id
-DELETE {{baseUrl}}/products/01948fa8-61e4-4c1c-807e-560b491fbb1c
+DELETE {{CatalogAPI_baseUrl}}/products/01948fa8-61e4-4c1c-807e-560b491fbb1c
 Content-Type: application/json
 
 ###
 
 ## GET Health of the microservice
-GET {{baseUrl}}/health
+GET {{CatalogAPI_baseUrl}}/health
 # ?pageNumber=4
 # &pageSize=2
 Content-Type: application/json

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Configure http request pipeline
 
 
+
 // After building application 
 var app = builder.Build();
 
