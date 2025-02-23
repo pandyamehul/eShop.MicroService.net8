@@ -1,0 +1,26 @@
+## GET Basket for a user
+GET {{BasketAPI_baseUrl}}/basket/dummy
+Content-Type: application/json
+###
+
+POST {{BasketAPI_baseUrl}}/basket
+Content-Type: application/json
+
+{
+    "UserName": "dummy",
+    "Items": [
+        {
+            "Quantity": 2,
+            "Color": "Red",
+            "Price": 500,
+            "ProductId": "5334c996-8457-4cf0-815c-ed2b77c4ff61",
+            "ProductName": "IPhone X"
+        }
+    ]
+}
+###
+
+DELETE {{BasketAPI_baseUrl}}/basket/dummy
+Content-Type: application/json
+
+###
