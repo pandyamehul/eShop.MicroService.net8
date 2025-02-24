@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Configure MediatR and FluentValidation for request validation
 var assembly = typeof(Program).Assembly;
 builder.Services.AddMediatR(config =>
 {

@@ -1,3 +1,4 @@
+// ------------------------ Configure ASP.Net request pipeline Pre build --------------------------------//
 //Before building application
 using BuildingBlocks.Behaviours;
 
@@ -18,6 +19,15 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
 });
 
+//Add Marten library support for DB Crud operations
+builder.Services.AddMarten(options =>
+{
+    options.Connection(builder.Configuration.GetConnectionString("Database")!);
+    options.Schema.For<ShoppingCart>().Identity(schema => schema.UserName );
+}).UseLightweightSessions();
+
+
+// ------------------------ Configure ASP.Net request pipeline Post build --------------------------------//
 // After building application 
 var app = builder.Build();
 
