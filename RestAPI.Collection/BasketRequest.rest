@@ -1,5 +1,5 @@
 ## GET Basket for a user
-GET {{BasketAPI_baseUrl}}/basket/dummy
+GET {{BasketAPI_baseUrl}}/basket/User_1
 Content-Type: application/json
 ###
 
@@ -7,16 +7,18 @@ POST {{BasketAPI_baseUrl}}/basket
 Content-Type: application/json
 
 {
-    "UserName": "dummy",
-    "Items": [
-        {
-            "Quantity": 2,
-            "Color": "Red",
-            "Price": 500,
-            "ProductId": "5334c996-8457-4cf0-815c-ed2b77c4ff61",
-            "ProductName": "IPhone X"
-        }
-    ]
+    "Cart": {
+        "UserName": "User_1",
+        "Items": [
+            {
+                "ProductId": "5334c996-8457-4cf0-815c-ed2b77c4ff61",
+                "ProductName": "IPhone X",            
+                "Color": "Red",
+                "Quantity": 2,
+                "Price": 500
+            }
+        ]
+    }
 }
 ###
 

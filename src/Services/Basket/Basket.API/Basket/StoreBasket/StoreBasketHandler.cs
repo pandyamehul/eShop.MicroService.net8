@@ -22,9 +22,9 @@ public class StoreBasketCommandHandler
         ShoppingCart cart = command.Cart;
 
         //TODO: Store data in db
-        await basketRepository.StoreBasket(cart, cancellationToken);
+        await basketRepository.StoreBasket(command.Cart, cancellationToken);
         //TODO: Update cache
 
-        return new StoreBasketResult(cart.UserName);
+        return new StoreBasketResult(command.Cart.UserName);
     }
 }
