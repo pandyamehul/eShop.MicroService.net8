@@ -1,6 +1,11 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
+using BuildingBlocks.Behaviours;
+using BuildingBlocks.Exceptions.Handler;
+
 // ------------------------ Configure ASP.Net request pipeline Pre build --------------------------------//
 //Before building application
-using BuildingBlocks.Behaviours;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,12 +34,30 @@ builder.Services.AddMarten(options =>
 //Add repository to container
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
+//Add Custom and Generic Exception handler
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+//Add support for health checks
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
+
 // ------------------------ Configure ASP.Net request pipeline Post build --------------------------------//
 // After building application 
 var app = builder.Build();
 
 //Configure http request pipeline
 app.MapCarter();
+
+//Configure app to use custom exception handling, empty { } indicates pipeline is 
+app.UseExceptionHandler(optios => { });
+
+//Configure health checks
+app.UseHealthChecks(
+    "/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 //Run application
 app.Run();

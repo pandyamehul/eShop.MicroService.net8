@@ -17,7 +17,7 @@ public class StoreBasketEndpoint : ICarterModule
                 return Results.Created($"/basket/{response.UserName}", response);
             }
         ).WithName("StoreBasket")
-        .Produces<StoreBasketResponse>(StatusCodes.Status200OK)
+        .Produces<StoreBasketResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("StoreBasketByUserName")
         .WithDescription("Store/Update Basket for user");

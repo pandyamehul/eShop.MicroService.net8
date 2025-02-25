@@ -3,6 +3,7 @@ GET {{BasketAPI_baseUrl}}/basket/User_1
 Content-Type: application/json
 ###
 
+##
 POST {{BasketAPI_baseUrl}}/basket
 Content-Type: application/json
 
@@ -22,7 +23,8 @@ Content-Type: application/json
 }
 ###
 
-DELETE {{BasketAPI_baseUrl}}/basket/dummy
+##
+DELETE {{BasketAPI_baseUrl}}/basket/User_1
 Content-Type: application/json
 
 ###
