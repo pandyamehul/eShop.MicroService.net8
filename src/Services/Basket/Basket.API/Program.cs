@@ -26,6 +26,8 @@ builder.Services.AddMarten(options =>
     options.Schema.For<ShoppingCart>().Identity(schema => schema.UserName );
 }).UseLightweightSessions();
 
+//Add repository to container
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 // ------------------------ Configure ASP.Net request pipeline Post build --------------------------------//
 // After building application 
