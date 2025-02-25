@@ -28,3 +28,8 @@ DELETE {{BasketAPI_baseUrl}}/basket/User_1
 Content-Type: application/json
 
 ###
+
+## GET Health of the microservice
+GET {{BasketAPI_baseUrl}}/health
+Content-Type: application/json
+###
