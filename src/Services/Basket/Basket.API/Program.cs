@@ -33,6 +33,14 @@ builder.Services.AddMarten(options =>
 
 //Add repository to container
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+
+//Add suport for Redis Cahce
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis")!;
+    //options.InstanceName = "Basket_";
+});
 
 //Add Custom and Generic Exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
