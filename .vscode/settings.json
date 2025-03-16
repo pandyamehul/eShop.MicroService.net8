@@ -1,12 +1,12 @@
 {
     "rest-client.environmentVariables": {
         "local-devlopment": {
-            "CatalogAPI_baseUrl": "https://localhost:6050",
-            "BasketAPI_baseUrl": "https://localhost:6150"
+            "CatalogAPI_baseUrl": "https://localhost:5050",
+            "BasketAPI_baseUrl": "https://localhost:5051"
         },
         "local-docker": {
             "CatalogAPI_baseUrl": "https://localhost:6060",
-            "BasketAPI_baseUrl": "https://localhost:6160"
+            "BasketAPI_baseUrl": "https://localhost:6061"
         }
     }
 }

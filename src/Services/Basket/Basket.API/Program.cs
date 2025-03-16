@@ -1,8 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-
-using BuildingBlocks.Behaviours;
-using BuildingBlocks.Exceptions.Handler;
+using StackExchange.Redis;
 
 // ------------------------ Configure ASP.Net request pipeline Pre build --------------------------------//
 //Before building application
@@ -38,7 +36,7 @@ builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 //Add suport for Redis Cahce
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration.GetConnectionString("Redis")!;
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
     //options.InstanceName = "Basket_";
 });
 
@@ -47,7 +45,8 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 //Add support for health checks
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 
 // ------------------------ Configure ASP.Net request pipeline Post build --------------------------------//
 // After building application 
@@ -65,7 +64,8 @@ app.UseHealthChecks(
     new HealthCheckOptions
     {
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-    });
+    }
+);
 
 //Run application
 app.Run();

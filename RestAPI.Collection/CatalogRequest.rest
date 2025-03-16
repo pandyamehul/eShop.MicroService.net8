@@ -14,8 +14,8 @@ Content-Type: application/json
 
 ## GET Products List
 GET {{CatalogAPI_baseUrl}}/products
-?pageNumber=4
-&pageSize=2
+?pageNumber=1
+&pageSize=5
 Content-Type: application/json
 ###
 
