@@ -1,7 +1,6 @@
 
 using Discount.gRPC.Data;
 using Discount.gRPC.Services;
-using Discount.Grpc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 // Configure Db context
 builder.Services.AddDbContext<DiscountContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("Databse"))
+    options.UseSqlite(builder.Configuration.GetConnectionString("Database"))
 );
 
 var app = builder.Build();
+
+// Apply db context db migration
+app.UseMigration();
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<DiscountService>();
