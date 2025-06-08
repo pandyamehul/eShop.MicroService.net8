@@ -1,12 +1,14 @@
+using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using StackExchange.Redis;
 
 // ------------------------ Configure ASP.Net request pipeline Pre build --------------------------------//
 //Before building application
 
 var builder = WebApplication.CreateBuilder(args);
 
+// -- Application Services --//
+#region Application Services
 //Add services to container - dependency injection
 builder.Services.AddCarter();
 
@@ -21,12 +23,15 @@ builder.Services.AddMediatR(config =>
     //centralize logging
     config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
 });
+#endregion
 
+// -- Database Services --//
+#region Database Services
 //Add Marten library support for DB Crud operations
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
-    options.Schema.For<ShoppingCart>().Identity(schema => schema.UserName );
+    options.Schema.For<ShoppingCart>().Identity(schema => schema.UserName);
 }).UseLightweightSessions();
 
 //Add repository to container
@@ -39,7 +44,19 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
     //options.InstanceName = "Basket_";
 });
+#endregion
 
+// -- Grpc Services --//
+// TODO: Add Grps service dependencies
+#region Grpc Services
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUri"]!);
+});
+#endregion
+
+// -- Common, cross cuting and health check Services --//
+#region Common, cross cutting and health services
 //Add Custom and Generic Exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
@@ -47,8 +64,11 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+#endregion
+
 
 // ------------------------ Configure ASP.Net request pipeline Post build --------------------------------//
+
 // After building application 
 var app = builder.Build();
 
