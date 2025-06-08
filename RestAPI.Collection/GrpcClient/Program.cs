@@ -2,7 +2,8 @@
 using Discount.Grpc;
 
 // create a new gRPC channel to connect to the server
-using var channel = GrpcChannel.ForAddress("https://localhost:5052");
+// using var channel = GrpcChannel.ForAddress("https://localhost:5052");
+using var channel = GrpcChannel.ForAddress("https://localhost:6062");
 // create a new gRPC client for the DiscountProtoService
 var client = new DiscountProtoService.DiscountProtoServiceClient(channel);
 
@@ -32,10 +33,10 @@ var updateDiscount = new UpdateDiscountRequest
 {
     Coupon = new CouponModel
     {
-        Id = 4,
-        ProductName = "IPhone 16 Pro",
+        Id = 3,
+        ProductName = "Nokia 3310",
         Description = "Launch discount updated",
-        Amount = 190
+        Amount = 80
     }
 };
 var updatedDiscountResponse = await client.UpdateDiscountAsync(updateDiscount);

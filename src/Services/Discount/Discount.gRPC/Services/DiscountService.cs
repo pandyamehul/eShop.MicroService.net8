@@ -40,7 +40,8 @@ public class DiscountService
         await discountDbContext.SaveChangesAsync();
 
         logger.LogInformation(
-            "Discount is successfully created. Product: {productName}, Amount : {amount}"
+            "Discount is successfully created. {id} => Product: {productName}, Amount : {amount}"
+            , coupon.Id
             , coupon.ProductName
             , coupon.Amount
         );
