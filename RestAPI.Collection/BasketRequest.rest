@@ -15,7 +15,7 @@ Content-Type: application/json
                 "ProductId": "5334c996-8457-4cf0-815c-ed2b77c4ff61",
                 "ProductName": "IPhone X",            
                 "Color": "Red",
-                "Quantity": 2,
+                "Quantity": 1,
                 "Price": 500
             }
         ]
