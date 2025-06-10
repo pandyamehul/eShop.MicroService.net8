@@ -16,5 +16,4 @@ public abstract class Aggregate<TId> : Entity<TId>, IAggregate<TId>
         _domainEvents.Clear();
         return dequeuedEvents;
     }
-
 }

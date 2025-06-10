@@ -1,5 +1,6 @@
 ﻿namespace Order.Domain.Abstractions;
-public abstract class Entity<T> : Entity<T>
+
+public abstract class Entity<T> : IEntity<T>
 {
     public T Id { get; set; }
     public DateTime? CreatedAt { get; set; }
