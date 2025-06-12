@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Order.Domain.Models;
+﻿namespace Order.Domain.Models;
 
 public class Customer : Entity<CustomerId>
 {
