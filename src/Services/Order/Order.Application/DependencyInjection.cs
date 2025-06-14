@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Order.Application;
 
-public static class DipendencyInjection
+public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {

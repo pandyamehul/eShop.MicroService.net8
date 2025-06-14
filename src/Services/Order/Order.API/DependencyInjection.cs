@@ -1,7 +1,8 @@
 ﻿namespace Order.API;
 
-public static class DipendencyInjection
-{    public static IServiceCollection AddApiServices(this IServiceCollection services)
+public static class DependencyInjection
+{
+    public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         //services.Addcarter();
         return services;
