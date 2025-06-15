@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Order.Domain.Enums;
-using Order.Domain.Models;
-using Order.Domain.ValueObjects;
-
-namespace Order.Infrastructure.Data.Configurations;
+﻿namespace Order.Infrastructure.Data.Configurations;
 
 public class OrderConfiguration : IEntityTypeConfiguration<Order.Domain.Models.Order>
 {
