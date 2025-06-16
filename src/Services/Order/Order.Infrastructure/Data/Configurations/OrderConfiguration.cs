@@ -6,7 +6,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order.Domain.Models.O
     {
         builder.HasKey(order => order.Id);
         builder.Property(o => o.Id).HasConversion(
-                OrderId => OrderId.Value,
+                orderId => orderId.Value,
                 dbId => OrderId.Of(dbId)
             );
         builder.HasOne<Customer>()
@@ -15,15 +15,14 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order.Domain.Models.O
                 .IsRequired();
         builder.HasMany(o => o.OrderItems)
             .WithOne()
-            .HasForeignKey(oi=>oi.OrderId)
-            .IsRequired();
+            .HasForeignKey(oi => oi.OrderId);
         builder.ComplexProperty(o => o.OrderName, nameBuilder =>
-        {
-            nameBuilder.Property(n => n.Value)
-                .HasColumnName(nameof(Order.Domain.Models.Order.OrderName))
-                .HasMaxLength(100)
-                .IsRequired();
-        });
+            {
+                nameBuilder.Property(n => n.Value)
+                    .HasColumnName(nameof(Order.Domain.Models.Order.OrderName))
+                    .HasMaxLength(100)
+                    .IsRequired();
+            });        
         builder.ComplexProperty(o => o.ShippingAddress, addressBuilder => {
             addressBuilder.Property(a => a.Name)
                 .HasMaxLength(50)
@@ -41,7 +40,28 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order.Domain.Models.O
             addressBuilder.Property(a => a.State)
                 .HasMaxLength(50);
             addressBuilder.Property(a => a.ZipCode)
-                .HasMaxLength(10);
+                .HasMaxLength(10)
+                .IsRequired();
+        });
+        builder.ComplexProperty(o => o.BillingAddress, addressBuilder => {
+            addressBuilder.Property(a => a.Name)
+                .HasMaxLength(50)
+                .IsRequired();
+            addressBuilder.Property(a => a.LastName)
+                .HasMaxLength(50)
+                .IsRequired();
+            addressBuilder.Property(a => a.EmailAddress)
+                .HasMaxLength(50);
+            addressBuilder.Property(a => a.AddressLine)
+                .HasMaxLength(200)
+                .IsRequired();
+            addressBuilder.Property(a => a.Country)
+                .HasMaxLength(50);
+            addressBuilder.Property(a => a.State)
+                .HasMaxLength(50);
+            addressBuilder.Property(a => a.ZipCode)
+                .HasMaxLength(10)
+                .IsRequired();
         });
         builder.ComplexProperty(o => o.Payment, paymentBuilder =>
         {

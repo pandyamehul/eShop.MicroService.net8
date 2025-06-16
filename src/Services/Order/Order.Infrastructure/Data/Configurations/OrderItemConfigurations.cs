@@ -1,21 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Order.Infrastructure.Data.Configurations
+﻿namespace Order.Infrastructure.Data.Configurations;
+public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
 {
-    public class OrderItemConfigurations : IEntityTypeConfiguration<OrderItem>
+    public void Configure(EntityTypeBuilder<OrderItem> builder)
     {
-        public void Configure(EntityTypeBuilder<OrderItem> builder)
-        {
-            builder.HasKey(oi => oi.Id);
-            builder.Property(oi => oi.Id).HasConversion(
-                OrderItemId => OrderItemId.Value,
+        builder.HasKey(oi => oi.Id);
+
+        builder.Property(oi => oi.Id)
+            .HasConversion(
+                orderItemId => orderItemId.Value,
                 dbId => OrderItemId.Of(dbId)
             );
-            builder.HasOne<Product>()
-                .WithMany()
-                .HasForeignKey(oi => oi.ProductId);
-            builder.Property(oi => oi.Quantity).IsRequired();
-            builder.Property(oi => oi.Price).IsRequired();
-        }
+
+        builder.HasOne<Product>()
+            .WithMany()
+            .HasForeignKey(oi => oi.ProductId);
+
+        builder.Property(oi => oi.Quantity)
+            .HasPrecision(18,2)
+            .IsRequired();
+
+        builder.Property(oi => oi.Price)
+            .HasPrecision(18, 2)
+            .IsRequired();
     }
 }

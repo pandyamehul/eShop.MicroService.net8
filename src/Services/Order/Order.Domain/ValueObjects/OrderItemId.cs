@@ -4,15 +4,15 @@ public record OrderItemId
 {
     public Guid Value { get; }
 
-    private OrderItemId(Guid orderItemId) => this.Value = orderItemId;
+    private OrderItemId(Guid value) => Value = value;
 
-    public static OrderItemId Of(Guid orderItemId)
+    public static OrderItemId Of(Guid value)
     {
-        ArgumentNullException.ThrowIfNull(orderItemId);
-        if (orderItemId == Guid.Empty)
+        ArgumentNullException.ThrowIfNull(value);
+        if (value == Guid.Empty)
         {
             throw new DomainException("Order Id cannot be empty");
         }
-        return new OrderItemId(orderItemId);
+        return new OrderItemId(value);
     }
 }
