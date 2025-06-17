@@ -10,7 +10,7 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
-        var connectionString = configuration.GetConnectionString("OrderDb");
+        var connectionString = configuration.GetConnectionString("Database");
 
         // Add service to container
         services.AddDbContext<ApplicationDbContext>(options =>

@@ -2,6 +2,7 @@
 using Order.API;
 using Order.Application;
 using Order.Infrastructure;
+using Order.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,14 @@ builder.Services
 
 // Configure Http request pipeline
 var app = builder.Build();
+
+// Use API Services
+app.UseApiServices();
+
+if (app.Environment.IsDevelopment())
+{
+    await app.InitialiseDatabaseAsync();
+}
 
 // Run application
 app.Run();
