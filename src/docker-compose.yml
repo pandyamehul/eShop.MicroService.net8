@@ -36,3 +36,7 @@ volumes:
   postgres_basket:
   mssql_orderdb:
 
+networks:
+  eshop_network:    
+    name: eshop.network
+    driver: bridge
