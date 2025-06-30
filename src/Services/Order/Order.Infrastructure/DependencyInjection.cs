@@ -14,9 +14,12 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("Database");
 
         // Add service to container
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddScoped<ISaveChangesInterceptor, AuditEntityInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventInterceptor>();
+
+        services.AddDbContext<ApplicationDbContext>( (serviceProvider, options) =>
         {
-            options.AddInterceptors(new AuditEntityInterceptor());
+            options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
             options.UseSqlServer(connectionString);
         });
 
