@@ -1,10 +1,14 @@
-﻿namespace Order.Application.Orders.Queries.GetOrders;
+﻿using BuildingBlocks.Pagination;
+using Microsoft.EntityFrameworkCore;
+using Order.Application.Extensions;
+
+namespace Order.Application.Orders.Queries.GetOrders;
 
 public class GetOrdersHandler
     (IApplicationDbContext dbContext)
     : IQueryHandler<GetOrdersQuery, GetOrdersResult>
 {
-    public Task<GetOrdersResult> Handle(GetOrdersQuery query, CancellationToken cancellationToken)
+    public async Task<GetOrdersResult> Handle(GetOrdersQuery query, CancellationToken cancellationToken)
     {
         // get orders with pagination
         // return result
@@ -23,12 +27,12 @@ public class GetOrdersHandler
 
         return new GetOrdersResult
         (
-            new paginatedResult<OrderDto>
+            new PaginatedResult<OrderDto>
             (
-                totalCount: totalCount,
+                count: totalCount,
                 pageIndex: pageIndex,
                 pageSize: pageSize,
-                orders: orders.ToOrderDtoList()
+                data: orders.ToOrderDtoList()
             )
         );
     }
