@@ -1,4 +1,4 @@
-namespace Order.Application.Orders.Queries;
+namespace Order.Application.Orders.Queries.GetOrdersByName;
 
 public record GetOrdersByNameQuery(string Name) 
     : IQuery<GetOrdersByNameResult>;
