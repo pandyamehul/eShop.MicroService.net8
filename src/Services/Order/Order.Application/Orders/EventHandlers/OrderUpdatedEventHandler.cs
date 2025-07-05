@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Order.Application.Orders.EventHandlers;
 
-namespace Order.Application.Orders.EventHandlers
+public class OrderUpdatedEventHandler
+    (ILogger<OrderUpdatedEventHandler> logger)
+    : INotificationHandler<OrderUpdatedEvent>
 {
-    internal class OrderUpdatedEventHandler
+    public Task Handle(OrderUpdatedEvent notification, CancellationToken cancellationToken)
     {
+        logger.LogInformation("Domain Event Handled in OrderUpdatedEventHandler: Order with ID {OrderId} updated.", notification.order.Id);
+        logger.LogInformation("Order Details: {DomainEvent}", notification.GetType().Name);
+        // Here you can add logic to handle the order update event, such as sending a confirmation
+        return Task.CompletedTask;
     }
 }
