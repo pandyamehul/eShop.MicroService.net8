@@ -1,4 +1,10 @@
 ###
+
+## Get Orders - GET /health
+GET {{OrderAPI_baseUrl}}/health
+Content-Type: application/json
+###
+
 ## Get Orders - GET /orders
 GET {{OrderAPI_baseUrl}}/orders
 Content-Type: application/json

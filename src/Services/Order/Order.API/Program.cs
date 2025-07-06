@@ -12,7 +12,7 @@ builder.Services
     // Infra Services - EF Core
     .AddInfrastructureServices(builder.Configuration)
     // API Service - Carter, HealthCheck
-    .AddApiServices();
+    .AddApiServices(builder.Configuration);
 
 // Configure Http request pipeline
 var app = builder.Build();
