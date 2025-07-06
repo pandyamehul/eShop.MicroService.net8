@@ -1,0 +1,120 @@
+###
+## Get Orders - GET /orders
+GET {{OrderAPI_baseUrl}}/orders
+Content-Type: application/json
+###
+
+## Get Orders w/ pagination - GET /orders
+GET {{OrderAPI_baseUrl}}/orders?PageIndex=1&PageSize=2
+Content-Type: application/json
+###
+
+## Get Orders by Name w/ pagination - GET /orderByName
+GET {{OrderAPI_baseUrl}}/orders/ord_3
+Content-Type: application/json
+###
+
+## Get Orders by Customer w/ pagination - GET /orderByCustomer
+GET {{OrderAPI_baseUrl}}/orders/customer/58c49479-ec65-4de2-86e7-033c546291aa
+Content-Type: application/json
+###
+
+## Create Order - POST /orders
+POST {{OrderAPI_baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "Order": {
+    "CustomerId": "58c49479-ec65-4de2-86e7-033c546291aa",
+    "OrderName": "ORD_1",
+    "ShippingAddress": {
+      "Name": "Valentina",
+      "LastName": "Legros",
+      "EmailAddress": "valeg@xmail.com",
+      "AddressLine": "Wiegand Pass Suite 825",
+      "City": "Oklahoma City",
+      "State": "Oklahoma",
+      "ZipCode": "41248",
+      "Country": "USA"
+    },
+    "BillingAddress": {
+      "Name": "Valentina",
+      "LastName": "Legros",
+      "EmailAddress": "valeg@xmail.com",
+      "AddressLine": "Wiegand Pass Suite 825",
+      "City": "Oklahoma City",
+      "State": "Oklahoma",
+      "ZipCode": "41248",
+      "Country": "USA"
+    },
+    "Payment": {
+      "CardName": "CARD_1",
+      "CardNumber": "875-444-3739",
+      "Expiration": "12/29",
+      "Cvv": "455",
+      "PaymentMethod": 1
+    },
+    "OrderStatus": 2,
+    "OrderItems": [
+      {
+        "ProductId": "c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914",
+        "Quantity": 1,
+        "Price": 500
+      }
+    ]
+  }
+}
+###
+
+## Update Order - PUT /orders
+PUT {{OrderAPI_baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "Order": {
+    "Id": "848e937f-6a11-43f7-907a-ebc11325bd96",
+    "CustomerId": "58c49479-ec65-4de2-86e7-033c546291aa",
+    "OrderName": "ORD_3",
+    "ShippingAddress": {
+      "Name": "Valentina",
+      "LastName": "Legros",
+      "EmailAddress": "valeg@xmail.com",
+      "AddressLine": "Wiegand Pass Suite 825",
+      "City": "Oklahoma City",
+      "State": "Oklahoma",
+      "ZipCode": "41248",
+      "Country": "USA"
+    },
+    "BillingAddress": {
+      "Name": "Valentina",
+      "LastName": "Legros",
+      "EmailAddress": "valeg@xmail.com",
+      "AddressLine": "Wiegand Pass Suite 825",
+      "City": "New York City",
+      "State": "New York",
+      "ZipCode": "41248",
+      "Country": "USA"
+    },
+    "Payment": {
+      "CardName": "CARD_2",
+      "CardNumber": "875-444-3739",
+      "Expiration": "12/29",
+      "Cvv": "456",
+      "PaymentMethod": 1
+    },
+    "OrderStatus": 2,
+    "OrderItems": [
+      {
+        "ProductId": "c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914",
+        "Quantity": 1,
+        "Price": 500
+      }
+    ]
+  }
+}
+###
+
+## Delete Order - DELETE /orders/{id}
+DELETE {{OrderAPI_baseUrl}}/orders/848e937f-6a11-43f7-907a-ebc11325bd96
+Content-Type: application/json
+###

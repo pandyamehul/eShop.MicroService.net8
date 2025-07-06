@@ -15,9 +15,10 @@ public class GetOrdersByNameHandler
         var orders = await dbContext.Orders
             .Include(o => o.OrderItems)
             .AsNoTracking() // Use AsNoTracking for read-only queries to improve performance
-            .Where(o => o.OrderName.Value.Contains(query.Name, StringComparison.OrdinalIgnoreCase))
-            .OrderBy(o => o.OrderName)
+            .Where(o => o.OrderName.Value.Contains(query.Name))
+            .OrderBy(o => o.OrderName.Value)
             .ToListAsync(cancellationToken);
+
         return new GetOrdersByNameResult(orders.ToOrderDtoList());
     }    
 }

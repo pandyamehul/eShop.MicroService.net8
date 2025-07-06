@@ -6,8 +6,7 @@ namespace Order.API.Endpoints;
 public record CreateOrderRequest(OrderDto Order);
 public record CreateOrderResponse(Guid Id);
 
-public class CreateOrder 
-    : ICarterModule
+public class CreateOrder : ICarterModule
 {
     //- Accepts a CreateOrderRequest object.
     //- Maps the request to a CreateOrderCommand.
