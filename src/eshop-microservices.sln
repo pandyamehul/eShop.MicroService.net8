@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{9F738D32-B32D-44B9-9A6B-3B84E2E5C355}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{5E519EA5-559A-4DA6-8B92-3E9A2F70DDBA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E5DAF4CD-F602-45A2-8DF4-8D98B33D5C0B} = {E5DAF4CD-F602-45A2-8DF4-8D98B33D5C0B}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{4423837B-E81E-48AC-B54A-5816A600E438}"
 EndProject

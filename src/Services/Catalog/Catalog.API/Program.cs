@@ -36,8 +36,24 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
-
-
+// Add OpenAPI/Swagger services
+#region OpenAPI/Swagger services
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Catalog API",
+        Version = "v1",
+        Description = "Catalog microservice API for eShop application",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "eShop Team",
+            Email = "support@eshop.com"
+        }
+    });
+});
+#endregion
 
 // ------------------------ Configure ASP.Net request pipeline --------------------------------//
 // Initiate and Run application pipeline
@@ -86,6 +102,17 @@ app.UseHealthChecks(
     {
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     });
+
+// Configure Swagger middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API V1");
+        c.RoutePrefix = "swagger";
+    });
+}
 
 //run application
 app.Run();

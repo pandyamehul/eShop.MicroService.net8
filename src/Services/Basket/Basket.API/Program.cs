@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// -- Application Services --//
+// -- Application Services : Carter and MediatR --//
 #region Application Services
 //Add services to container - dependency injection
 builder.Services.AddCarter();
@@ -84,6 +84,24 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 #endregion
 
+// Add OpenAPI/Swagger services
+#region OpenAPI/Swagger services
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Basket API",
+        Version = "v1",
+        Description = "Basket microservice API for eShop application",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "eShop Team",
+            Email = "support@eshop.com"
+        }
+    });
+});
+#endregion
 
 // ------------------------ Configure ASP.Net request pipeline Post build --------------------------------//
 
@@ -104,6 +122,17 @@ app.UseHealthChecks(
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     }
 );
+
+// Configure Swagger middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API V1");
+        c.RoutePrefix = "swagger";
+    });
+}
 
 //Run application
 app.Run();
