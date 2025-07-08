@@ -1,14 +1,19 @@
-﻿namespace Order.Application.Orders.EventHandlers.Domain;
+﻿using MassTransit;
+using Order.Application.Extensions;
+
+namespace Order.Application.Orders.EventHandlers.Domain;
 
 public class OrderCreatedEventHandler
-    (ILogger<OrderCreatedEventHandler> logger)
+    (IPublishEndpoint publishEndpoint, ILogger<OrderCreatedEventHandler> logger)
     : INotificationHandler<OrderCreatedEvent>
 {
-    public Task Handle(OrderCreatedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(OrderCreatedEvent domainEvent, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Domain Event Handled in OrderCreatedEventHandler: Order with ID {OrderId} created .", notification.order.Id);
-        logger.LogInformation("Order Details: {DomainEvent}", notification.GetType().Name);
+        logger.LogInformation("Domain Event Handled in OrderCreatedEventHandler: Order with ID {OrderId} created .", domainEvent.order.Id);
+        logger.LogInformation("Domain Event Handled: {DomainEvent}", domainEvent.GetType().Name);
         // Here you can add logic to handle the order creation event, such as sending a confirmation
-        return Task.CompletedTask;
+
+        var orderCreatedIntegrationEvent = domainEvent.order.ToOrderDto();
+        await publishEndpoint.Publish(orderCreatedIntegrationEvent, cancellationToken);
     }
 }
