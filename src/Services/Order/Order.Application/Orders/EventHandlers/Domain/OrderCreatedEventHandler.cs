@@ -1,4 +1,4 @@
-﻿namespace Order.Application.Orders.EventHandlers;
+﻿namespace Order.Application.Orders.EventHandlers.Domain;
 
 public class OrderCreatedEventHandler
     (ILogger<OrderCreatedEventHandler> logger)
