@@ -7,8 +7,8 @@ using Order.Infrastructure.Data.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    // App Services - MediatR
-    .AddApplicationServices()
+    // App Services - MediatR, MassTransit
+    .AddApplicationServices(builder.Configuration)
     // Infra Services - EF Core
     .AddInfrastructureServices(builder.Configuration)
     // API Service - Carter, HealthCheck
