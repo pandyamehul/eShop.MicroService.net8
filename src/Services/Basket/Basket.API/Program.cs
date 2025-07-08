@@ -1,3 +1,4 @@
+using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -64,6 +65,12 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     };
     return handler;
 });
+#endregion
+
+// -- Async Communication Services (publish to RabbitMq using MassTransit) --//
+#region Async Communication Services
+// Note* - No Assembly parameters passed here, as Basket API is publisher here
+builder.Services.AddMessageBroker(builder.Configuration);
 #endregion
 
 // -- Common, cross cuting and health check Services --//
