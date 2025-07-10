@@ -59,7 +59,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order.Domain.Models.O
                 .HasMaxLength(50);
             addressBuilder.Property(a => a.State)
                 .HasMaxLength(50);
-            addressBuilder.Property(a => a.ZipCode)
+            addressBuilder.Property(a => a.ZipCode) 
                 .HasMaxLength(10)
                 .IsRequired();
         });

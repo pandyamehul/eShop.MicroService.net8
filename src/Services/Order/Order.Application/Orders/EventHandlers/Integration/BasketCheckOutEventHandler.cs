@@ -28,8 +28,8 @@ public class BasketCheckOutEventHandler
             message.AddressLine,
             message.City,
             message.State,
-            message.Country, 
-            message.ZipCode
+            message.ZipCode,
+            message.Country            
         );
         var paymentDto = new PaymentDto(
             message.CardName, 

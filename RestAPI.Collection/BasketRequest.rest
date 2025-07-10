@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "Cart": {
-        "UserName": "User_1",
+        "UserName": "swn",
         "Items": [
             {
                 "ProductId": "5334c996-8457-4cf0-815c-ed2b77c4ff61",
@@ -19,6 +19,32 @@ Content-Type: application/json
                 "Price": 500
             }
         ]
+    }
+}
+###
+
+##
+POST {{BasketAPI_baseUrl}}/basket/checkout
+Content-Type: application/json
+
+{
+    "BasketCheckOutDto": {
+        "UserName": "swn",
+        "CustomerId": "189dc8dc-990f-48e0-a37b-e6f2b60b9d7d",
+        "TotalPrice": 1.10,
+        "Name" : "Customer 1",
+        "LastName": "Last Name",
+        "EmailAddress": "test@test.com",
+        "AddressLine": "34 Charles Street",
+        "Country": "United Kingdom",
+        "City": "London",
+        "State": "London",
+        "ZipCode": "3236",
+        "CardName": "Test Card",
+        "CardNumber": "485-5425",
+        "Expiration": "12/25",
+        "CVV": "123",
+        "PaymentMethod": 1
     }
 }
 ###

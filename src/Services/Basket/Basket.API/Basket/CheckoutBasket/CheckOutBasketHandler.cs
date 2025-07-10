@@ -37,7 +37,7 @@ public class CheckoutBasketCommandHandler
         }
         
         // prepare event message
-        var eventMessage = command.BasketCheckOutDto.Adapt<BasketCheckoutEvent>();
+        var eventMessage = command.BasketCheckOutDto.Adapt<BasketCheckOutEvent>();
         eventMessage.TotalPrice = basket.TotalPrice;
 
         // publish event message

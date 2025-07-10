@@ -1,6 +1,7 @@
 # version: '3.4'
 
 services:
+# Postgres - CatalogDb
  catalogdb:
    container_name: eshop.catalogdb
    environment:
@@ -14,7 +15,8 @@ services:
     - postgres_catalog:/var/lib/postgresql/data/
    networks:
     - eshop_network
- 
+
+# Postgres - BasketDb 
  basketdb:
    container_name: eshop.basketdb
    environment:
@@ -29,6 +31,7 @@ services:
    networks:
     - eshop_network
 
+# Redis Cache - distributedcache
  distributedcache:
    container_name: eshop.distributedcache
    ports:
@@ -37,6 +40,7 @@ services:
    networks:
     - eshop_network
 
+# MS SQL - orderDb
  orderdb:
    container_name: eshop.orderdb
    environment:
@@ -49,11 +53,26 @@ services:
      - mssql_orderdb:/var/lib/mssql/data/
    networks:
     - eshop_network
-    
+
+# Messagebroker - RabbitMq
+ eshop.messagebroker:
+    container_name: eshop.messagebroker
+    hostname: ecommerce-mq
+    environment:
+        - RABBITMQ_DEFAULT_USER=guest
+        - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+        - "5670:5672"
+        - "15670:15672"
+    networks:
+    - eshop_network
+
+# API - Catalog MicroService
  catalog.api:
     container_name: eshop.catalog.api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Server=catalogdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true
@@ -68,10 +87,11 @@ services:
     networks:
       - eshop_network
 
+# API - Basket MicroService
  basket.api:
     container_name: eshop.basket.api
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true
@@ -90,10 +110,11 @@ services:
     networks:
       - eshop_network
 
+# Discount.Grpc MicroService
  discount.grpc:
     container_name: eshop.discount.grpc
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Data Source=eshop.discount.db
