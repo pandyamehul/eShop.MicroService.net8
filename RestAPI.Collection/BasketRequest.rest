@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "Cart": {
-        "UserName": "swn",
+        "UserName": "cus",
         "Items": [
             {
                 "ProductId": "5334c996-8457-4cf0-815c-ed2b77c4ff61",
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 {
     "BasketCheckOutDto": {
-        "UserName": "swn",
+        "UserName": "cus",
         "CustomerId": "189dc8dc-990f-48e0-a37b-e6f2b60b9d7d",
         "TotalPrice": 1.10,
         "Name" : "Customer 1",
