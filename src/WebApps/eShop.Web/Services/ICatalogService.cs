@@ -1,6 +1,4 @@
-﻿using eShop.Web.Models.Catalog;
-
-namespace Shopping.Web.Services;
+﻿namespace eShop.Web.Services;
 
 public interface ICatalogService
 {
