@@ -4,11 +4,13 @@
             "CatalogAPI_baseUrl": "https://localhost:5050",
             "BasketAPI_baseUrl": "https://localhost:5051",
             "OrderAPI_baseUrl": "https://localhost:5053",
+            "YarpApiGateway_baseUrl": "https://localhost:5054"
         },
         "local-docker": {
             "CatalogAPI_baseUrl": "https://localhost:6060",
             "BasketAPI_baseUrl": "https://localhost:6061",
-            "OrderAPI_baseUrl": "https://localhost:6063"
+            "OrderAPI_baseUrl": "https://localhost:6063",
+            "YarpApiGateway_baseUrl": "https://localhost:6064"
         }
     }
 }

@@ -1,0 +1,16 @@
+###
+
+## /GET Products List
+GET {{YarpApiGateway_baseUrl}}/catalog-service/products
+Content-Type: application/json
+###
+
+## GET Basket for a user
+GET {{YarpApiGateway_baseUrl}}/basket-service/basket/cus
+Content-Type: application/json
+###
+
+## Get Orders - GET /orders
+GET {{YarpApiGateway_baseUrl}}/order-service/orders
+Content-Type: application/json
+###
