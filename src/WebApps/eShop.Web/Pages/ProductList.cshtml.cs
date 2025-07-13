@@ -13,15 +13,15 @@ public class ProductListModel(
     [BindProperty(SupportsGet = true)]
     public string SelectedCategory { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(string categoryName)
+    public async Task<IActionResult> OnGetAsync(string category)
     {
         var response = await catalogService.GetProducts();
         CategoryList = response.Products.SelectMany(p => p.Category).Distinct();
 
-        if(!string.IsNullOrWhiteSpace(categoryName))
+        if(!string.IsNullOrWhiteSpace(category))
         {
-            ProductList = response.Products.Where(p => p.Category.Contains(categoryName));
-            SelectedCategory = categoryName;
+            ProductList = response.Products.Where(p => p.Category.Contains(category));
+            SelectedCategory = category;
         }
         else
         {

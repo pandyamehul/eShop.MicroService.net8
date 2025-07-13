@@ -1,9 +1,9 @@
 namespace eShop.Web.Pages;
 
-public class ProductDetailsModel (
+public class ProductDetailModel (
         IBasketService basketService,
         ICatalogService catalogService,
-        ILogger logger
+        ILogger<ProductDetailModel> logger
     )
     : PageModel
 {
