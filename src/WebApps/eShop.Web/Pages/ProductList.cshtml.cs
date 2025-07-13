@@ -3,7 +3,7 @@ namespace eShop.Web.Pages;
 public class ProductListModel(
         IBasketService basketService,
         ICatalogService catalogService,
-        ILogger logger
+        ILogger<ProductListModel> logger
     )
     : PageModel
 {

@@ -1,8 +1,8 @@
-namespace AspnetRunBasics;
+namespace eShop.Web.Pages;
 
 public class CartModel (
         IBasketService basketService,
-        ILogger logger
+        ILogger<CartModel> logger
     ) 
     : PageModel
 {
