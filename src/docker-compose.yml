@@ -46,6 +46,12 @@ services:
       context: .
       dockerfile: APIGateways/YarpApiGateway/Dockerfile
 
+  eshop.web:
+    image: ${DOCKER_REGISTRY-}eshopweb
+    build:
+      context: .
+      dockerfile: WebApps/eShop.Web/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
@@ -55,3 +61,4 @@ networks:
   eshop_network:    
     name: eshop.network
     driver: bridge
+

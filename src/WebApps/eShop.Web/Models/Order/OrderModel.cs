@@ -3,7 +3,7 @@
 public record OrderModel(
     Guid Id,
     Guid CustomerId,
-    string OrderName,
+    string UserName,
     AddressModel ShippingAddress,
     AddressModel BillingAddress,
     PaymentModel Payment,

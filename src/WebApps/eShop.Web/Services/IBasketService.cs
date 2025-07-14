@@ -14,7 +14,7 @@ public interface IBasketService
     Task<DeleteBasketResponse> DeleteBasket(string userName);
     
     [Post("/basket-service/basket/checkout")]
-    Task<CheckoutBasketResponse> CheckoutBasket(CheckoutBasketRequest request);
+    Task<CheckOutBasketResponse> CheckOutBasket(CheckOutBasketRequest request);
 
     public async Task<ShoppingCartModel> LoadUserBasket()
     {

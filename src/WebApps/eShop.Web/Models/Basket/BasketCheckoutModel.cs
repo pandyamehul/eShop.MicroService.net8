@@ -1,8 +1,8 @@
 ﻿namespace eShop.Web.Models.Basket;
 
-public class BasketCheckoutModel
+public class BasketCheckOutModel
 {
-    public string OrderName { get; set; } = default!;
+    public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = default!;
     public decimal TotalPrice { get; set; } = default!;
 
@@ -25,5 +25,5 @@ public class BasketCheckoutModel
 }
 
 // wrapper classes
-public record CheckoutBasketRequest(BasketCheckoutModel BasketCheckoutDto);
-public record CheckoutBasketResponse(bool IsSuccess);
+public record CheckOutBasketRequest(BasketCheckOutModel BasketCheckOutDto);
+public record CheckOutBasketResponse(bool IsSuccess);
